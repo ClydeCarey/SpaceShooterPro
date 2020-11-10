@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using JetBrains.Annotations;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +7,10 @@ public class Player : MonoBehaviour
 {    
     [SerializeField]
     private float _speed = 3.5f;
-        
+    [SerializeField]
+    private GameObject _laserPrefab;
+    //private Vector3 _laserOffset = new Vector3(0.0f , 0.8f, 0f);
+            
     // Start is called before the first frame update
     void Start()
     {        
@@ -17,6 +21,14 @@ public class Player : MonoBehaviour
     void Update()
     {
         CalculateMovement();
+
+        //if I hit the space key
+        // spawn game object
+
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            Instantiate(_laserPrefab, transform.position + new Vector3(0, 0.8f, 0), Quaternion.identity);
+        }
     }
 
     void CalculateMovement()
