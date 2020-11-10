@@ -9,6 +9,9 @@ public class Player : MonoBehaviour
     private float _speed = 3.5f;
     [SerializeField]
     private GameObject _laserPrefab;
+    [SerializeField]
+    private float _fireRate = 0.5f;
+    private float _canFire = -1.0f;
     //private Vector3 _laserOffset = new Vector3(0.0f , 0.8f, 0f);
             
     // Start is called before the first frame update
@@ -22,14 +25,13 @@ public class Player : MonoBehaviour
     {
         CalculateMovement();
 
-        //if I hit the space key
-        // spawn game object
-
-        if(Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && Time.time > _canFire)
         {
-            Instantiate(_laserPrefab, transform.position + new Vector3(0, 0.8f, 0), Quaternion.identity);
+            FireLaser();
         }
     }
+
+
 
     void CalculateMovement()
     {
@@ -63,6 +65,12 @@ public class Player : MonoBehaviour
         //optimized version of y position bounds instead of the above, using clamping instead
         transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, -3.8f, 0.0f), 0);
 
+    }
+
+    void FireLaser()
+    {
+        _canFire = Time.time + _fireRate;
+        Instantiate(_laserPrefab, transform.position + new Vector3(0, 0.8f, 0), Quaternion.identity);
     }
 
 }
