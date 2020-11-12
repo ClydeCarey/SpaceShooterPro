@@ -14,6 +14,8 @@ public class UIManager : MonoBehaviour
     private Sprite[] _liveSptrites;
     [SerializeField]
     private Text _gameOvertext;
+    [SerializeField]
+    private Text _restartText;
 
     // Start is called before the first frame update
     void Start()
@@ -33,9 +35,15 @@ public class UIManager : MonoBehaviour
 
         if (currentLives == 0)
         {
-            _gameOvertext.gameObject.SetActive(true);
-            StartCoroutine(GameOverFlickerRoutine());
+            GameOverSequence();
         }
+    }
+
+    void GameOverSequence()
+    {
+        _gameOvertext.gameObject.SetActive(true);
+        _restartText.gameObject.SetActive(true);
+        StartCoroutine(GameOverFlickerRoutine());
     }
 
     IEnumerator GameOverFlickerRoutine()
