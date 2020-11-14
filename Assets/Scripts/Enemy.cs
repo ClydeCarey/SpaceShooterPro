@@ -52,7 +52,8 @@ public class Enemy : MonoBehaviour
             }
 
             _anim.SetTrigger("OnEnemyDeath");
-            _speed = 0;
+            //_speed = 0;
+            transform.GetComponent<BoxCollider2D>().enabled = false;
             Destroy(this.gameObject, 2.0f);
         }
 
@@ -65,7 +66,8 @@ public class Enemy : MonoBehaviour
             }
 
             _anim.SetTrigger("OnEnemyDeath");
-            _speed = 0;
+            //_speed = 0;
+            transform.GetComponent<BoxCollider2D>().enabled = false;
             Destroy(this.gameObject,2.0f);
         }
     }
